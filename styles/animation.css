@@ -1,0 +1,38 @@
+body {
+  /* essential styling */
+  --c0: #ff9800;
+  --c1: #3c3c3c;
+  background: radial-gradient(circle at var(--x, 0) var(--y, 0),
+    var(--gc0, var(--c0)) var(--stop, 0%),
+    var(--gc1, var(--c1)) 0);
+  background-size: 100vw 100vh;
+}
+
+body::after { /* just to prettify stuff */
+  
+      /* use absolute positioning because
+       * margin: 0 on body
+       * breaks Edge for some reason */
+      
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      font: calc(16vmin + 3rem)/ 100vh 'Leckerli One', cursive;
+      text-align: center;
+      cursor: pointer;
+      content: 'Click!';
+}
+
+@supports (mix-blend-mode: screen) {
+  /* in supports because
+   * background: inherit
+   * breaks Edge for some reason
+   * (sorry, I had no better idea) */
+
+   body::after {
+     background: inherit;
+     -webkit-background-clip: text;
+     background-clip: text;
+     color: transparent;
+     filter: invert(1) grayscale(1) contrast(3);
+   }
+}
